@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "title": "Cryptocurrency Price Prediction Using Machine Learning",
+    "category": ["AI", "Web"],
+    "description": "This program helps in forecasting cryptocurrency prices by training a machine learning model to predict future bitcoin prices based on historical data."
+  },
+  {
+    "id": 2,
+    "title": "REST-API-CRUD-Operation",
+    "category": ["API", "Backend", "Web"],
+    "description": "A Java-based application using Hibernate, Spring Boot, Maven, JSP, and Servlets that enables efficient Create, Read, Update, and Delete (CRUD) operations with seamless RESTful API interaction."
+  },
+  {
+    "id": 3,
+    "title": "Flight Reservation Project",
+    "category": ["E-commerce", "Web"],
+    "description": "A comprehensive airline E-commerce website using Java Spring Boot, MySQL, AngularJS, and Thymeleaf, featuring secure user authentication, flight search, booking, and check-in functionalities."
+  },
+  {
+    "id": 4,
+    "title": "Blog Application (SpringBoot Project)",
+    "category": ["Web", "Backend", "API"],
+    "description": "A secure blogging application using Spring Security for authentication and authorization. It supports CRUD operations for blog posts with Spring Boot, Maven, and Postman."
+  },
+  {
+    "id": 5,
+    "title": "Hospital Management Application",
+    "category": ["Web", "E-commerce"],
+    "description": "A full-stack application using HTML, CSS, Bootstrap, and Spring Thymeleaf for the frontend, with MySQL, Spring Boot, and Hibernate for backend functionalities such as CRUD operations and report downloads."
+  },
+  {
+    "id": 6,
+    "title": "Bitcoin Mining Application",
+    "category": ["Web", "API"],
+    "description": "A Java Spring Boot app enabling Bitcoin mining and user account management, with RESTful API endpoints for transaction history viewing, configuration settings, and logging."
+  },
+  {
+    "id": 7,
+    "title": "Multiple File Upload Using Spring Boot",
+    "category": ["Web", "API"],
+    "description": "A Spring Boot application that facilitates uploading multiple files into a database via a RESTful API, demonstrating multipart file handling and storage with Spring Data JPA."
+  },
+  {
+    "id": 8,
+    "title": "QR Code Generator",
+    "category": ["Web", "API"],
+    "description": "A Java project that creates unique QR codes for various inputs, with customizable options for size and error correction levels, accessible through a REST API."
+  },
+  {
+    "id": 9,
+    "title": "Awesome Portfolio Collection",
+    "category": ["UI/UX", "Web"],
+    "description": "A comprehensive repository containing over 100 portfolio collections crafted using HTML, CSS, JavaScript, and other technologies, offering a diverse range of designs and functionalities."
+  },
+  {
+    "id": 10,
+    "title": "GitHub Streak Back",
+    "category": ["Backend", "API"],
+    "description": "A tool that helps restore broken GitHub streaks by automating contributions using Node.js and Git commands, designed for developers who missed a commit."
+  },
+  {
+    "id": 11,
+    "title": "AlgoByPrabhat",
+    "category": ["AI", "Web"],
+    "description": "A platform designed to simplify learning complex data structures and algorithms with interactive and engaging visualizations."
+  },
+  {
+    "id": 12,
+    "title": "Sharma AI",
+    "category": ["AI", "Web"],
+    "description": "A voice-activated virtual assistant allowing users to control their computer with voice commands. Built with HTML, CSS, JavaScript, Node.js, and AppleScript."
+  },
+  {
+    "id": 13,
+    "title": "User Details App",
+    "category": ["Web", "Backend"],
+    "description": "A Spring Boot-based CRUD application for managing personal information with validation and MySQL integration."
+  },
+  {
+    "id": 14,
+    "title": "SpringBoot-OpenAI",
+    "category": ["AI", "Backend"],
+    "description": "A Spring Boot-based API integration with OpenAI, allowing seamless interaction with AI models for generating responses and text processing."
+  },
+  {
+    "id": 15,
+    "title": "Mobile Banking",
+    "category": ["Web", "E-commerce"],
+    "description": "A Spring Boot application providing banking services like account management, transactions, and secure fund transfers, ensuring high security and scalability."
+  },
+  {
+    "id": 16,
+    "title": "Uber Application",
+    "category": ["Web", "E-commerce"],
+    "description": "A Spring Boot-based ride-hailing platform that allows users to book rides, track drivers, estimate fares, and make secure payments."
+  },
+  {
+    "id": 17,
+    "title": "Cafe Management System",
+    "category": ["Web", "E-commerce"],
+    "description": "A Spring Boot application for managing cafe operations, including order management, menu customization, billing, and customer management."
+  },
+  {
+    "id": 18,
+    "title": "Ollama Spring Boot AI Implementation",
+    "category": ["AI", "Backend"],
+    "description": "Integrates Spring Boot with Ollama AI models to provide real-time AI-powered responses using models like DeepSeek R1."
+  },
+  {
+    "id": 19,
+    "title": "LinkedIn Application",
+    "category": ["Web", "API", "UI/UX"],
+    "description": "A microservices-based project replicating key features of LinkedIn, such as user management, connections, posts, and notifications, using Eureka for service discovery and API Gateway."
+  }
+]

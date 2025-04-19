@@ -1,0 +1,15 @@
+[
+  { "name": "GitHub", "icon": "github", "url": "https://github.com/prabhatkumarv" },
+  { "name": "LinkedIn", "icon": "linkedin", "url": "https://www.linkedin.com/in/prabhatkumarv/" },
+  { "name": "Instagram", "icon": "instagram", "url": "https://instagram.com/prabhatkumarv" },
+  { "name": "StackOverflow", "icon": "stack-overflow", "url": "https://stackoverflow.com/users/20137678/prabhatkumarv" },
+  { "name": "Naukri", "icon": "briefcase", "url": "https://www.naukri.com/mnjuser/profile" },
+  { "name": "HackerRank", "icon": "code", "url": "https://www.hackerrank.com/prabhatkumarv" },
+  { "name": "LeetCode", "icon": "list-checks", "url": "https://leetcode.com/prabhatkumarv/" },
+  { "name": "Twitter", "icon": "twitter", "url": "https://twitter.com/prabhatkumarv" },
+  { "name": "YouTube", "icon": "youtube", "url": "https://youtube.com/@prabhatkumarv" },
+  { "name": "Email", "icon": "mail", "url": "mailto:prabhatkumarv@gmail.com" },
+  { "name": "Facebook", "icon": "facebook", "url": "https://facebook.com/prabhatkumarv" },
+  { "name": "Telegram", "icon": "send", "url": "https://t.me/prabhatkumarv" },
+  { "name": "Dev.to", "icon": "dev-to", "url": "https://dev.to/prabhatkumarv" }
+]
