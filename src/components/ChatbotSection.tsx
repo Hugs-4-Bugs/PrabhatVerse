@@ -2,8 +2,36 @@ import type React from "react";
 import { useRef, useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 
-function parseProfile(profile: string) {
-  const sections = { about: "", services: "", education: "", skills: "", projects: "", technologies: "", blogs: "", contact: "", work: "", internship: "", program: "" };
+// Define the sections interface to fix type error
+interface ProfileSections {
+  about: string;
+  services: string;
+  education: string;
+  skills: string;
+  projects: string;
+  technologies: string;
+  blogs: string;
+  contact: string;
+  work: string;
+  internship: string;
+  program: string;
+  [key: string]: string; // Add index signature
+}
+
+function parseProfile(profile: string): ProfileSections {
+  const sections: ProfileSections = {
+    about: "",
+    services: "",
+    education: "",
+    skills: "",
+    projects: "",
+    technologies: "",
+    blogs: "",
+    contact: "",
+    work: "",
+    internship: "",
+    program: ""
+  };
   let cur = "";
   for (const line of profile.split(/\r?\n/)) {
     const sec = line.trim().toLowerCase();
@@ -154,9 +182,43 @@ function gptLocalSmartAnswer(query: string, profile: string): React.ReactNode {
   return "I'm Prabhat Kumar—engineer, founder, and creator. Ask me about my skills, experience, coding links, or projects!";
 }
 
+// Define the type for messages
+type Message = {
+  sender: "bot" | "user";
+  text: string | React.ReactNode;
+  voice?: boolean;
+};
+
+// Define the SpeechRecognition interface
+interface SpeechRecognitionEvent extends Event {
+  results: {
+    [index: number]: {
+      [index: number]: {
+        transcript: string;
+      };
+    };
+  };
+}
+
+interface SpeechRecognition extends EventTarget {
+  lang: string;
+  interimResults: boolean;
+  onresult: (event: SpeechRecognitionEvent) => void;
+  onerror: (event: Event) => void;
+  start: () => void;
+}
+
+// Extend Window interface
+declare global {
+  interface Window {
+    SpeechRecognition?: new () => SpeechRecognition;
+    webkitSpeechRecognition?: new () => SpeechRecognition;
+  }
+}
+
 export default function ChatbotSection({ messages, setMessages }: {
-  messages: { sender: "bot" | "user", text: string | React.ReactNode, voice?: boolean }[],
-  setMessages: (m: { sender: "bot" | "user", text: string | React.ReactNode, voice?: boolean }[]) => void,
+  messages: Message[];
+  setMessages: (m: Message[]) => void;
 }) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -168,7 +230,10 @@ export default function ChatbotSection({ messages, setMessages }: {
     if (stored) setProfile(stored);
     else fetch("/src/data/master_profile.md").then(res => res.text()).then(setProfile);
   }, []);
-  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   // Patched chat mic: speech-to-text only
   function handleVoice() {
@@ -176,12 +241,18 @@ export default function ChatbotSection({ messages, setMessages }: {
       alert("Speech recognition is not supported in this browser.");
       return;
     }
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
+
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognitionAPI) {
+      alert("Speech recognition is not supported in this browser.");
+      return;
+    }
+
+    const recognition = new SpeechRecognitionAPI();
     recognition.lang = "en-US";
     recognition.interimResults = false;
-    recognition.onresult = (ev) => {
-      setInput(ev.results[0][0].transcript);
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      setInput(event.results[0][0].transcript);
     };
     recognition.onerror = () => alert("Could not get voice input.");
     recognition.start();
@@ -190,18 +261,25 @@ export default function ChatbotSection({ messages, setMessages }: {
   function handleSend(aiText?: string, voice?: boolean) {
     const text = (aiText ?? input).trim();
     if (!text) return;
-    setMessages([...messages, { sender: "user", text, voice }]);
+
+    const newUserMessage: Message = { sender: "user", text, voice };
+    setMessages([...messages, newUserMessage]);
     setLoading(true);
     setInput("");
+
     setTimeout(() => {
       const answer = gptLocalSmartAnswer(text, profile);
-      setMessages(msgs => [...msgs, { sender: "bot", text: answer }]);
+      const newBotMessage: Message = { sender: "bot", text: answer };
+      setMessages(prevMessages => [...prevMessages, newBotMessage]);
       setLoading(false);
     }, 200);
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if ((e.key === "Enter" && !e.shiftKey)) { e.preventDefault(); handleSend(); }
+    if ((e.key === "Enter" && !e.shiftKey)) {
+      e.preventDefault();
+      handleSend();
+    }
   }
 
   return (
@@ -209,39 +287,63 @@ export default function ChatbotSection({ messages, setMessages }: {
       <div className="flex-1 min-h-0 overflow-y-auto px-2 pb-3">
         <div className="flex flex-col gap-3 pt-7">
           {messages.map((m, i) => (
-            <div key={i} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`rounded-xl px-4 py-2 max-w-[80%] font-normal ${m.sender === 'user' ? 'bg-green-700 text-white self-end' : 'bg-[#232325] text-gray-100 shadow-sm self-start'} text-base whitespace-pre-line`}>
+            <div key={i} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'} w-full`}>
+              <div className={`${
+                m.sender === 'user'
+                  ? 'bg-primary text-primary-foreground ml-auto max-w-[80%] rounded-xl px-4 py-3 shadow-md'
+                  : 'bg-card text-card-foreground max-w-[88%] rounded-xl px-6 py-3 shadow-sm border border-border pl-8'
+              } font-normal text-base whitespace-pre-line`}>
                 {typeof m.text === 'string' || typeof m.text === 'undefined'
-                  ? <ReactMarkdown components={{a: props => <a {...props} target="_blank" rel="noopener noreferrer" />}}>{m.text || "(blank)"}</ReactMarkdown>
+                  ? <ReactMarkdown>
+                      {m.text || "(blank)"}
+                    </ReactMarkdown>
                   : m.text
                 }
               </div>
             </div>
           ))}
           {loading && (
-            <div className="flex justify-start"><div className="rounded-xl px-4 py-2 max-w-[80%] bg-[#232325] text-gray-400">Thinking...</div></div>
+            <div className="flex justify-start w-full">
+              <div className="rounded-xl px-6 py-3 pl-8 max-w-[88%] bg-card text-muted-foreground border border-border animate-pulse">
+                Thinking...
+              </div>
+            </div>
           )}
           <div ref={chatEndRef} />
         </div>
       </div>
-      <form className="border-t border-gray-700 bg-[#262626] flex items-center gap-2 px-3 py-2"
-        onSubmit={e => { e.preventDefault(); handleSend(); }}>
-        <textarea
-          className="flex-1 resize-none rounded bg-[#18181b] border border-gray-700 p-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-700 min-h-[44px] max-h-[120px]"
-          rows={1}
-          placeholder="Type your message... Ask me anything about Prabhat Kumar."
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          required
-        />
-        <button type="button" className="p-2 rounded-full bg-gray-800 text-white hover:bg-green-700 disabled:bg-gray-700 transition" disabled={loading} title="Use Speech to Text" onClick={handleVoice}>
-          <i className="fa fa-microphone" />
-        </button>
-        <button type="submit" className="px-4 py-2 rounded bg-green-700 hover:bg-green-600 text-white font-semibold text-base disabled:bg-gray-600" disabled={!input.trim() || loading}>
-          Send
-        </button>
-      </form>
+
+      <div className="px-2 md:px-4 py-3">
+        <div className="max-w-[800px] mx-auto flex items-end gap-2 border border-chat-border rounded-xl bg-chat-input-bg px-3 py-2 shadow-md">
+          <button
+            type="button"
+            className="text-xl text-primary hover:text-primary/80 px-2 py-1 focus:outline-none transition-colors"
+            title="Use Speech to Text"
+            onClick={handleVoice}
+            disabled={loading}
+          >
+            <i className="fa fa-microphone" />
+          </button>
+          <textarea
+            className="flex-1 resize-none bg-transparent text-foreground px-2 py-2 focus:outline-none focus:ring-0
+                     placeholder:text-muted-foreground text-sm min-h-[40px] max-h-[200px] rounded-md"
+            rows={1}
+            placeholder="Type your message... Ask me anything about Prabhat Kumar."
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            required
+          />
+          <button
+            type="button"
+            className="text-xl px-2 py-1 text-primary hover:text-primary/80 disabled:opacity-30 focus:outline-none transition-colors"
+            onClick={() => handleSend()}
+            disabled={!input.trim() || loading}
+          >
+            <i className="fa-solid fa-paper-plane" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

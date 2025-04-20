@@ -8,6 +8,7 @@ import UserTypeModal from "./components/UserTypeModal";
 import ChatbotSection, { gptLocalSmartAnswer } from "./components/ChatbotSection";
 import TerminalModal from "./components/TerminalModal";
 import VoiceAssistantModal from "./components/VoiceAssistantModal";
+import BrowserModal from "./components/BrowserModal";
 import AboutSection from "./sections/AboutSection";
 import ServicesSection from "./sections/ServicesSection";
 import EducationSection from "./sections/EducationSection";
@@ -33,7 +34,7 @@ const sectionMap: Record<string, React.ComponentType> = {
 };
 
 function useIsMobile() {
-  const [mobile, setMobile] = useState(() => window.innerWidth < 1024);
+  const [mobile, setMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024);
   useEffect(() => {
     function onResize() { setMobile(window.innerWidth < 1024); }
     window.addEventListener("resize", onResize);
@@ -47,9 +48,10 @@ export default function App() {
   const [isGridOpen, setIsGridOpen] = useState(false);
   const [userType, setUserType] = useState<string | null>(null);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [browserOpen, setBrowserOpen] = useState(false);
   const [profileMd, setProfileMd] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [theme, setTheme] = useState<'light'|'dark'>(() => localStorage.getItem('theme') === 'light' ? 'light' : 'dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => localStorage.getItem('theme') === 'light' ? 'light' : 'dark');
   const [voiceModalOpen, setVoiceModalOpen] = useState(false);
   const [tryVoicePopupShown, setTryVoicePopupShown] = useState(false);
   const [messages, setMessages] = useState<any[]>([{
@@ -57,15 +59,38 @@ export default function App() {
     text: "Hello! I am Prabhat Kumar's AI Assistant. You can ask about skills, projects, or anything else."
   }]);
 
+  const isMobile = useIsMobile();
+
   useEffect(() => {
-    fetch("/src/data/master_profile.md").then(res => res.text()).then(setProfileMd);
+    fetch("/src/data/master_profile.md")
+      .then(res => res.text())
+      .then(setProfileMd)
+      .catch(err => console.error("Failed to load profile:", err));
   }, []);
 
   useEffect(() => {
     localStorage.setItem('theme', theme || 'dark');
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    document.documentElement.classList.toggle('light', theme === 'light');
+    document.documentElement.classList.remove('dark', 'light');
+    document.documentElement.classList.add(theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (isMobile && !sidebarCollapsed) {
+      setSidebarCollapsed(true);
+    }
+  }, [isMobile, sidebarCollapsed]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '[') {
+        setSidebarCollapsed(true);
+      } else if (e.key === ']') {
+        setSidebarCollapsed(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // After who selection, show try voice popup *exactly once*
   useEffect(() => {
@@ -78,8 +103,7 @@ export default function App() {
 
   return (
     <div className={theme === 'dark' ? "dark" : "light"}>
-      {/* <div className="flex h-screen bg-[#202123] overflow-hidden"> */}
-      <div className="flex h-screen bg-[#202123] overflow-x-hidden">
+      <div className="flex h-screen bg-background overflow-x-hidden">
         {!userType && <UserTypeModal onSelect={setUserType} />}
         <TryVoicePopup
           open={!!userType && tryVoicePopupShown && !voiceModalOpen}
@@ -91,17 +115,19 @@ export default function App() {
           setActiveSection={setActiveSection}
           collapsed={sidebarCollapsed}
           setCollapsed={setSidebarCollapsed}
+          theme={theme}
         />
         <div
-          className={`flex-1 flex flex-col min-h-0 relative overflow-hidden transition-all duration-200 ${sidebarCollapsed ? "ml-12" : "ml-56"}`}
+          className={`flex-1 flex flex-col min-h-0 relative overflow-hidden transition-all duration-300 ${sidebarCollapsed ? "ml-0 lg:ml-12" : "ml-0 lg:ml-56"}`}
         >
           <TopBar
             onProfileClick={() => setIsGridOpen(!isGridOpen)}
             isGridOpen={isGridOpen}
             onTerminalClick={() => setTerminalOpen(true)}
             onVoiceAssistantClick={() => setVoiceModalOpen(true)}
+            onBrowserClick={() => setBrowserOpen(true)}
             theme={theme}
-            setTheme={setTheme}
+            setTheme={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
           />
           <VoiceAssistantModal
             open={voiceModalOpen}
@@ -109,14 +135,18 @@ export default function App() {
             knowledge={profileMd}
             localAi={gptLocalSmartAnswer}
           />
+          <BrowserModal
+            open={browserOpen}
+            onClose={() => setBrowserOpen(false)}
+          />
           <SocialGrid open={isGridOpen} />
-          <ChatWindow activeSection={activeSection}>
+          <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed}>
             {activeSection === 'Home' ? (
               <ChatbotSection messages={messages} setMessages={setMessages} />
             ) : activeSection === 'Profile (Admin)' ? (
               <ProfileAdminSection onProfileUpdate={setProfileMd} />
             ) : (
-              <Suspense fallback={<div className="text-gray-300">Loading...</div>}>
+              <Suspense fallback={<div className="text-muted-foreground">Loading...</div>}>
                 <SectionComponent />
               </Suspense>
             )}

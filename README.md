@@ -1,50 +1,77 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# PrabhatVerse
 
-Currently, two official plugins are available:
+PrabhatVerse is a powerful portfolio application designed to showcase advanced AI and speech-to-text capabilities. It leverages a chatbot and voice model to provide intelligent responses. The profile section is protected, allowing only the admin to update data such as resumes and other information for training purposes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Speech to Text**: Convert your speech into text using the microphone.
+- **Chatbot Interaction**: Engage with a smart chatbot powered by AI, trained with various datasets.
+- **Voice Responses**: The app uses voice models to give spoken responses.
+- **Admin Access**: Only the admin has the ability to update the data, including the resume and profile section.
+- **Custom Chrome Integration**: Seamlessly works within Chrome for better user experience.
+- **Profile (Admin) Section**: Admin users can feed data for training the AI and manage content.
+- **Admin-Only Updates**: Resume and profile data can only be updated by the admin.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+- Node.js (v16 or above)
+- npm or yarn (Node package manager)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation and Running the Application
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. **Clone the Repository**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   First, clone the repository to your local machine using:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   ```bash
+   git clone https://github.com/Hugs-4-Bugs/PrabhatVerse.git
+   cd PrabhatVerse
+   ```
+
+2. **Install Dependencies**
+
+   Install the required dependencies using npm or yarn:
+
+   ```bash
+   npm install
+   ```
+
+   Or, if you're using yarn:
+
+   ```bash
+   yarn install
+   ```
+
+3. **Running the Application**
+
+   To start the application in development mode, use the following command:
+
+   ```bash
+   npm run dev
+   ```
+
+   Or with yarn:
+
+   ```bash
+   yarn dev
+   ```
+
+   The application will be available at [http://localhost:5173](http://localhost:5173) or the provided network URL.
+
+## Admin Access
+
+- The **Profile(Admin)** section is accessible only to the admin. Here, the admin can:
+  - Feed data for training purposes.
+  - Update the resume and other personal information.
+  - Analyze the data that drives both the chatbot and the voice model responses.
+
+### Default Admin Credentials:
+- **Username**: your_username
+- **Password**: your_password
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
