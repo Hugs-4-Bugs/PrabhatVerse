@@ -45,7 +45,7 @@ const TopBar = ({
       </div>
 
       {/* Center - App title */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 text-foreground font-semibold">
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-foreground font-semibold text-xl sm:text-2xl tracking-wide">
         <span>PrabhatVerse</span>
       </div>
 
