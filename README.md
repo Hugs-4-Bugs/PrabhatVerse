@@ -12,41 +12,6 @@ PrabhatVerse is a powerful portfolio application designed to showcase advanced A
 - **Custom Chrome Integration**: Seamlessly works within Chrome for better user experience.
 - **Profile (Admin) Section**: Admin users can feed data for training the AI and manage content.
 - **Admin-Only Updates**: Resume and profile data can only be updated by the admin.
-- **macOS Terminal Feature**:
-Interactive terminal-style interface where users can type commands to explore sections like projects, skills, experience, services, certifications, trading concepts, AI tools, blogs, contact info, and social profiles.
-```
-Commands include:
-
-about: Show the about/summary of the application.
-
-cd projects: List all major projects.
-
-ls skills: List all skills.
-
-tech stack: Show the core technologies used in the project.
-
-cd experience: Display work experience.
-
-cd education: Show educational background.
-
-cd services: List the provided services.
-
-cd certifications: View certifications.
-
-cd trading: Show advanced trading concepts.
-
-cd ai-tools: List custom AI tools and innovations.
-
-cd blogs: Open blog categories and subcategories.
-
-cd contact: Show contact information.
-
-cd socials: Display all social profiles.
-
-clear: Clear the terminal screen.
-
-help: Show all available commands.
-```
 
 ## Prerequisites
 
@@ -104,20 +69,6 @@ help: Show all available commands.
 ### Default Admin Credentials:
 - **Username**: your_username
 - **Password**: your_password
-
----
-<img width="1440" alt="Screenshot 2025-04-20 at 6 24 41 AM" src="https://github.com/user-attachments/assets/e434d4f7-c717-4030-a129-d61d6e7aa7dd" />
-
-<img width="1440" alt="Screenshot 2025-04-20 at 6 25 16 AM" src="https://github.com/user-attachments/assets/27cb065a-452a-4d72-a5cb-88586108ed73" />
-
-<img width="1440" alt="Screenshot 2025-04-20 at 6 25 33 AM" src="https://github.com/user-attachments/assets/57dc958d-6ea1-4bc5-b5de-0d4949cbf602" />
-
-<img width="1440" alt="Screenshot 2025-04-20 at 6 26 06 AM" src="https://github.com/user-attachments/assets/faa5b40c-a767-4f7a-b4b3-956193194199" />
-
-<img width="1440" alt="Screenshot 2025-04-20 at 6 26 34 AM" src="https://github.com/user-attachments/assets/0a7867b7-2ab5-4451-90e2-86ba8ed02782" />
-
-<img width="1440" alt="Screenshot 2025-04-20 at 6 27 36 AM" src="https://github.com/user-attachments/assets/a3281b23-a2a5-4ffc-8e00-ef73edbb14f0" />
-
 
 ---
 

@@ -83,17 +83,15 @@ const TopBar = ({
             : <i className="fa fa-moon text-xl text-blue-600" />
           }
         </button>
+
+        {/* Social Links Button */}
         <button
           aria-label="Show Social Links"
           className={`w-10 h-10 rounded-full overflow-hidden flex items-center justify-center border-2 ${isGridOpen ? "ring-2 ring-primary border-transparent" : "border-border hover:ring-2 hover:ring-primary/30"}`}
           onClick={onProfileClick}
+          title="Click to open social links"
         >
-          <img
-            src="/assets/profile.jpg"
-            alt="Profile"
-            className="w-9 h-9 object-cover rounded-full bg-muted"
-            onError={e => (e.currentTarget.src = "https://same-assets.com/ai-avatar.png")}
-          />
+          <i className="fa-solid fa-user-circle text-lg text-foreground" />
         </button>
       </div>
     </header>

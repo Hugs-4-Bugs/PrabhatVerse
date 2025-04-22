@@ -37,10 +37,13 @@ export default function VoiceAssistantModal({ open, onClose, knowledge, localAi 
         const voices = window.speechSynthesis.getVoices();
         const female = voices.find(v => v.gender === "female" && v.lang.startsWith("en")) ?? voices.find(v => v.name.match(/female|woman|girl|zira|susan/i));
         if (female) utter.voice = female;
-        utter.onend = () => setTimeout(() => setState('listening'), 100);
+
+        // After speaking, wait 3.5 sec before allowing user to speak
+        utter.onend = () => setTimeout(() => setState('idle'), 3500);
+
         window.speechSynthesis.speak(utter);
       } else {
-        setTimeout(()=>setState('listening'),700);
+        setTimeout(() => setState('idle'), 4500);
       }
     } else {
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
@@ -114,7 +117,6 @@ export default function VoiceAssistantModal({ open, onClose, knowledge, localAi 
         <div className="font-semibold tracking-tight text-lg mb-2 text-white">Prabhat’s AI Voice Assistant</div>
         <div className="mb-1 p-2 py-4 w-full rounded bg-gray-900 text-gray-300 min-h-[44px]">
           {state === 'greet' && <span>This model is still in training phase please continue with chat model. Thank You !...</span>}
-          {/* {state === 'greet' && <span>Greeted you; get ready to speak soon...</span>} */}
           {state === 'listening' && <span>Listening for your question...</span>}
           {state === 'thinking' && <span>Analyzing your request...</span>}
           {state === 'speaking' && <span><b>Q:</b> {transcript}<br /><b>A:</b> {typeof answer === 'string' ? answer : <>{answer}</>}</span>}
@@ -127,7 +129,7 @@ export default function VoiceAssistantModal({ open, onClose, knowledge, localAi 
           disabled={state === 'thinking' || state === 'speaking'}
         >
           {state === 'idle' ? 'Ask with Voice'
-           : state === 'listening' ? 'Listening...'
+           : state === 'listening' ? 'Click to speak...'
            : state === 'speaking' ? 'Speaking...' : 'Working...'}
         </button>
       </div>
