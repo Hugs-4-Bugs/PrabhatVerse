@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 const LOCAL_KEY = "_profile_admin_md";
 const DEFAULT_PROFILE = `# Prabhat Kumar - Master Profile\n\n**Full Name:** Prabhat Kumar\n\n## About\nShort bio/about you\n\n## Education\n- Your education...\n\n## Projects\n1. Project A\n2. Project B\n\n## Skills\n- Skill A\n- Skill B\n\n## Certifications\n- ...\n\n## Contact\n- Email: mailtoprabhat72@gmail.com`;
+const SECURITY_QUESTION = "What is your favorite color?";  // Define your security question here
+// Ans: My favorite color is navy blue
 
 export default function ProfileAdminSection({onProfileUpdate}:{onProfileUpdate?:(profile:string)=>void}) {
   const [username, setUsername] = useState("admin@gmail.com");

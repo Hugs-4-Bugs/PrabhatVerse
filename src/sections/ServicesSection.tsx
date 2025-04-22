@@ -46,7 +46,7 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: (i) => ({
+  hidden: (i: number) => ({
     opacity: 0,
     y: i % 2 === 0 ? -100 : 100,
     rotate: i % 2 === 0 ? -15 : 15,
@@ -67,7 +67,8 @@ const cardVariants = {
 };
 
 export default function ServicesSection() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  // const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">

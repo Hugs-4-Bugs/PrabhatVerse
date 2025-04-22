@@ -13,7 +13,7 @@ const skills = {
 };
 
 const itemVariants = {
-  hidden: (initialPosition) => ({
+  hidden: (initialPosition: any) => ({
     opacity: 0,
     y: initialPosition.y,
     x: initialPosition.x,
@@ -62,7 +62,7 @@ const skillItemVariants = {
   },
 };
 
-const getRandomStartPosition = (index) => {
+const getRandomStartPosition = (index: any): any => {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
   const edge = Math.floor(Math.random() * 8); // 0-7 for 8 entry points
@@ -129,9 +129,16 @@ export default function SkillsSection() {
   };
 
   return (
+    // <section className="max-w-6xl mx-auto px-6 py-16" ref={containerRef}>
+    //   <h2 className="fixed top-16 left-1/2 transform -translate-x-1/3 z-50 bg-opacity-50 backdrop-blur-md top-0 z-10 text-center text-4xl md:-4xl font-extrabold mb-14 py-6">
+    //     <span className="mr-2">🧠</span>
+    //     <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-teal-800 to-gray-400">
+    //       Skills & Expertise
+    //     </span>
+    //   </h2>
     <section className="max-w-6xl mx-auto px-6 py-16" ref={containerRef}>
       <h2 className="sticky bg-opacity-50 backdrop-blur-md top-0 z-10 text-center text-4xl md:-4xl font-extrabold mb-14 py-6">
-        <span className="mr-2">🧠</span>
+      <span className="mr-2">🧠</span>
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-teal-800 to-gray-400">
           Skills & Expertise
         </span>
