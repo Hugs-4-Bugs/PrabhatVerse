@@ -71,8 +71,9 @@ export default function ServicesSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-16">
-      <h2 className="sticky top-0 z-10 bg-[#1A1A1A] bg-opacity-60 backdrop-blur-md text-center text-4xl md:text-4xl font-extrabold mb-14 mt-100 py-4">
+    // pt-36 use karke "My Cutting-Edge Services" or cards k bich ka gap maintain kar sakte hai
+    <section className="max-w-6xl mx-auto px-6 pt-32 py-16">
+      <h2 className="fixed top-16 left-1/2 transform -translate-x-1/3 z-50 bg-opacity-60 backdrop-blur-md text-center text-4xl md:text-4xl font-extrabold mb-14 mt-100 py-6">
         <span className="mr-2">🚀</span>
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-teal-800 to-white">
           My Cutting-Edge Services
@@ -107,15 +108,15 @@ export default function ServicesSection() {
             className={`
               bg-[#232325]/80 border border-gray-700 backdrop-blur-md rounded-3xl p-6
               shadow-[0_10px_40px_rgba(0,0,0,0.3)] relative overflow-hidden group cursor-pointer
-              duration-500 ease-in-out
+              duration-500 ease-in-out 
               ${
                 hoveredIndex !== null && hoveredIndex !== i ? "" : "" // Removed the blur-sm and scale-95 classes
               }
-             h-[280px] w-[350px]
+             h-[280px] w-[350px] 
             `}
           >
             <motion.div
-              className="absolute inset-0 z-0 rounded-3xl bg-gradient-to-br from-[#ffffff0d] via-[#ffffff0a] to-[#ffffff0d]"
+              className="absolute inset-0 z-0 rounded-3xl bg-gradient-to-br from-[#ffffff0d] via-[#ffffff0a] to-[#ffffff0d] "
               animate={{ opacity: hoveredIndex === i ? 1 : 0.1, scale: hoveredIndex === i ? 1.05 : 1 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             />
