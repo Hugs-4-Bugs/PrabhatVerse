@@ -78,7 +78,7 @@ export default function ProfileAdminSection({onProfileUpdate}:{onProfileUpdate?:
           <button className="w-full mt-1 p-2 rounded bg-green-700 hover:bg-green-600 text-white font-bold">Login</button>
         </form>
         <div className="mt-3 text-xs text-gray-400 flex flex-col gap-2">
-          <button className="hover:underline" onClick={()=>{setShowChangeEmail(s=>!s);setMsg("");}}>Change Email</button>
+          {/* <button className="hover:underline" onClick={()=>{setShowChangeEmail(s=>!s);setMsg("");}}>Change Email</button> */}
           <button className="hover:underline" onClick={()=>{setShowForgot(s=>!s);setMsg("");}}>Forgot Password?</button>
         </div>
         {showChangeEmail && (
@@ -97,7 +97,7 @@ export default function ProfileAdminSection({onProfileUpdate}:{onProfileUpdate?:
             <button className="w-full mt-1 p-2 rounded bg-yellow-700 hover:bg-yellow-600 text-white font-bold">Get Password</button>
           </form>
         )}
-        <div className="text-xs text-gray-600 mt-5 text-left">admin credentials are always visible in the code as a comment in case you lose your password/email.</div>
+        <div className="text-xs text-gray-600 mt-5 text-left">Only authorized personnel may log in. Reach out internally if access is needed.</div>
       </div>
     );
 

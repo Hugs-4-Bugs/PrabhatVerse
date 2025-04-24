@@ -114,7 +114,7 @@ const allProjects = [
     title: "LinkedIn Application",
     category: "Web & Social",
     desc: "LinkedIn Application is a Spring Boot microservices-based project that replicates key features of LinkedIn, including user management, connections, posts, and notifications. It leverages Eureka for service discovery and API Gateway for seamless interaction between services.",
-    link: "https://github.com/Hugs-4-Bugs/Ollama-Spring-Boot-AI-Implementation.git",
+    link: "https://github.com/Hugs-4-Bugs/LinkedIn-Application.git",
   },
 ];
 
