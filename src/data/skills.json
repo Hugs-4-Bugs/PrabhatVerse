@@ -1,8 +1,11 @@
 {
-  "Frontend": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS", "AngularJS"],
+  "Frontend": ["React (Basic)", "HTML", "CSS", "Tailwind", "Angular (Basic)"],
+  "Backend": ["Spring Boot", "Node.js", "REST API", "Java"],
+  "Cloud": ["AWS", "EC2", "S3", "Lambda", "RDS", "VPC", "CloudFront", "CloudWatch", "IAM", "SQS", "SNS", "ELB"],
   "Design": ["Figma", "Adobe XD", "UI/UX"],
-  "Backend": ["Spring Boot", "Java", "Node.js", "Express.js", "REST API"],
   "Database": ["MySQL", "MongoDB", "PostgreSQL"],
-  "DevOps": ["Docker", "Git", "CI/CD", "Jenkins"],
-  "Other": ["Framer Motion", "AppleScript", "Data Science", "Machine Learning"]
+  "DevOps": ["Git", "Docker", "Jenkins", "Kubernetes", "Jira", "Slack"],
+  "Other": ["Machine Learning", "AppleScript", "Artificial intelligence"],
+  "Trading": ["Technical Analysis", "Algorithmic Trading", "Market Psychology", "Candlestick Patterns", "Backtesting"],
+  "BookWriting": ["Writing", "Creative Writing", "Research", "Self-Help", "Motivation"]
 }

@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const skills = {
-  Frontend: ["React", "HTML", "CSS", "Tailwind", "AngularJS"],
+  Frontend: ["React (Basic)", "HTML", "CSS", "Tailwind", "Angular (Basic)"],
   Backend: ["Spring Boot", "Node.js", "REST API", "Java"],
+  Cloud: ["AWS", "Firebase"],
   Design: ["Figma", "Adobe XD", "UI/UX"],
   Database: ["MySQL", "MongoDB", "PostgreSQL"],
-  DevOps: ["Git", "Docker", "Jenkins"],
-  Other: ["Machine Learning", "AppleScript"],
+  DevOps: ["Git", "Docker", "Jenkins", "Kubernetes", "Jira", "Slack"],
+  Other: ["Machine Learning", "AppleScript", "Artificial intelligence"],
   Trading: ["Technical Analysis", "Algorithmic Trading", "Market Psychology", "Candlestick Patterns", "Backtesting"],
   BookWriting: ["Writing", "Creative Writing", "Research", "Self-Help", "Motivation"],
 };
