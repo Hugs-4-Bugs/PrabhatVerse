@@ -1,14 +1,11 @@
 import { defineConfig } from "vite";
-// import react from "@vitejs/plugin-react";
-import  react  from "@vitejs/plugin-react";
-
-
+import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: '/PrabhatVerse'
-    plugins: [react()],
-    server: {
+  plugins: [react()],
+  base: process.env.VITE_BASE_PATH || "/",
+  server: {
     host: true,       // Make server externally accessible
     port: 5173,       // Correct port
     headers: {
