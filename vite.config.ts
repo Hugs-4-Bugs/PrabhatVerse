@@ -1,16 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: process.env.VITE_BASE_PATH || "/",
+  base: "/",  // ← Must be "/" for Vercel
   server: {
-    host: true,       // Make server externally accessible
-    port: 5173,       // Correct port
+    host: true,
+    port: 5173,
     headers: {
-      "ngrok-skip-browser-warning": "true",  // Skip Ngrok browser warning page
+      "ngrok-skip-browser-warning": "true",
     },
+  },
+  build: {
+    outDir: "dist",
   },
 });
 
