@@ -84,7 +84,7 @@ const allProjects = [
     title: "SpringBoot-OpenAI",
     category: "AI & API",
     desc: "SpringBoot-OpenAI is a Spring Boot-based API integration with OpenAI, allowing seamless interaction with AI models for generating responses, text processing, and more. It serves as an example for integrating AI-driven capabilities into Java applications.",
-    link: "https://github.com/Hugs-4-Bugs/user-details-app.git",
+    link: "https://github.com/Hugs-4-Bugs/SpringBoot-OpenAI",
   },
   {
     title: "Mobile Banking",

@@ -44,9 +44,9 @@ export default function AboutSection() {
         variants={fadeInUp}
         className="text-lg leading-8 text-neutral-200"
       >
-        Hi! I'm Prabhat Kumar, a passionate <b>Java Software Developer</b> driven by a vision to merge intelligence with innovation. I dive deep into AI, web technologies, and system design—crafting software that solves real-world problems. With love for Java, Spring Boot, React, and Machine Learning, I thrive on crafting scalable, high-performance apps.
+        Hi! I'm Prabhat Kumar, a passionate <b>Java Software Developer</b> driven by a vision to merge intelligence with innovation. I dive deep into AI, web technologies, and system design - crafting software that solves real-world problems. With love for Java, Spring Boot, React, and Machine Learning, I thrive on crafting scalable, high-performance apps.
         <br /><br />
-        I'm the founder of <strong className="text-pink-400">QuantumFusion Solutions</strong>, a company committed to cutting-edge solutions in AI, automation, and cloud computing. I'm also the author of <strong className="text-purple-400">"The Inner Battle"</strong> —a book about conquering self-doubt and unlocking inner strength.
+        I'm the founder of <a href="https://www.linkedin.com/company/106575838/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="text-pink-400 font-semibold">QuantumFusion Solutions</a>, a company committed to cutting-edge solutions in AI, automation, and cloud computing. I'm also the author of <strong className="text-purple-400">The Inner Battle</strong> — a book about conquering self-doubt and unlocking inner strength.
         <br /><br />
         With 4+ years of trading experience across Stocks, Crypto, Forex & Derivatives, I specialize in combining algorithmic precision with market psychology.
         <br /><br />
