@@ -30,7 +30,7 @@ const iconLibrary: Record<string, React.ReactNode> = {
 const SocialGrid = ({ open }: { open: boolean }) => {
   const [socials, setSocials] = useState<Social[]>([]);
   useEffect(() => {
-    fetch("/src/data/social_links.json").then(res => res.json()).then(setSocials);
+    fetch("/social_links.json").then(res => res.json()).then(setSocials);
   }, []);
 
   return (

@@ -19,6 +19,8 @@ import BlogsSection from "./sections/BlogsSection";
 import ContactSection from "./sections/ContactSection";
 import ResumeSection from "./sections/ResumeSection";
 import ProfileAdminSection from "./sections/ProfileAdminSection";
+import ChatSection from "./sections/ChatSection";
+import MasterProfileSection from "./sections/MasterProfileSection";
 import TryVoicePopup from "./components/TryVoicePopup";
 
 const sectionMap: Record<string, React.ComponentType> = {
@@ -31,6 +33,9 @@ const sectionMap: Record<string, React.ComponentType> = {
   Blogs: BlogsSection,
   Contact: ContactSection,
   Resume: ResumeSection,
+  Chat: ChatSection,
+  Home: ChatbotSection,
+  "Master Profile": MasterProfileSection,
 };
 
 function useIsMobile() {
@@ -176,44 +181,38 @@ export default function App() {
             onClose={() => setVoiceModalOpen(false)}
             knowledge={profileMd}
             localAi={gptLocalSmartAnswer}
+ messages={messages} // Pass messages and setMessages to VoiceAssistantModal
+ setMessages={setMessages}
           />
           <BrowserModal
             open={browserOpen}
             onClose={() => setBrowserOpen(false)}
           />
           <SocialGrid open={isGridOpen} />
-          <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed}>
-            {activeSection === 'Home' ? (
-              <ChatbotSection messages={messages} setMessages={setMessages} />
-            ) : activeSection === 'Profile (Admin)' ? (
-              <ProfileAdminSection onProfileUpdate={setProfileMd} />
-            ) : (
-              /*
-               * Pass fetched data as props to the section components.
-               * If a section doesn't have corresponding data, it will receive `null`.
-               * The section components should handle the case where the data is null (e.g., display a loading message).
-               */
-              <Suspense fallback={<div className="text-muted-foreground">Loading...</div>}>
-                {activeSection === 'About' && <AboutSection bioData={bioData} />}
+ <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed} messages={messages} setMessages={setMessages}>
+            <Suspense fallback={<div className="text-muted-foreground">Loading...</div>}>
+              {activeSection === 'Home' && <ChatbotSection messages={messages} setMessages={setMessages} />}
+              {activeSection === 'Home' && <ChatbotSection messages={messages} setMessages={setMessages} knowledge={profileMd} />}
                 {activeSection === 'Services' && <ServicesSection servicesData={sectionsData?.services} />}
                 {activeSection === 'Education' && <EducationSection educationData={sectionsData?.education} />}
                 {activeSection === 'Skills' && <SkillsSection skillsData={skillsData} />}
                 {activeSection === 'Projects' && <ProjectsSection projectsData={projectsData} />}
-                {activeSection === 'Technology' && <TechnologySection technologyData={sectionsData?.technology} />}
-                {activeSection === 'Blogs' && <BlogsSection blogsData={sectionsData?.blogs} />}
-                {activeSection === 'Contact' && <ContactSection contactData={sectionsData?.contact} />}
                 {activeSection === 'Resume' && <ResumeSection resumeData={sectionsData?.resume} />}
-                {/*
+ {activeSection === 'Technology' && <TechnologySection />}
+ {activeSection === 'Blogs' && <BlogsSection />}
+ {activeSection === 'Contact' && <ContactSection />}
+ {/*
                  * The following sections are handled separately above:
                  * - Home (ChatbotSection)
                  * - Profile (Admin) (ProfileAdminSection)
                  *
                  * If a section is not listed here or in the above conditions,
-                 * the fallback will be displayed.
+                 * the fallback will be displayed.*
                  */}
+ {activeSection === 'Profile (Admin)' && <ProfileAdminSection onProfileUpdate={setProfileMd} />}
                 {(!sectionMap[activeSection] && activeSection !== 'Home' && activeSection !== 'Profile (Admin)') && <SectionComponent />}
               </Suspense>
-            )}
+
           </ChatWindow>
           <TerminalModal open={terminalOpen} onClose={() => setTerminalOpen(false)} knowledge={profileMd} />
         </div>

@@ -10,7 +10,7 @@ const Sidebar = ({ activeSection, setActiveSection, collapsed, setCollapsed, the
   const [sections, setSections] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("/src/data/sections.json")
+    fetch("/sections.json")
       .then(response => response.json())
       .then(data => {
         setSections(data);
