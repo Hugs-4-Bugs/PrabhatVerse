@@ -62,8 +62,7 @@ export default function App() {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    fetch("/src/data/master_profile.md")
-    // fetch("/data/master_profile.md")
+ fetch("/data/master_profile.md")
       .then(res => res.text())
       .then(setProfileMd)
       .catch(err => console.error("Failed to load profile:", err));
