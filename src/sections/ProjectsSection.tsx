@@ -149,11 +149,8 @@ const cardVariants = {
   },
 };
 
-interface ProjectsSectionProps {
-  projectsData: any; // Define a more specific type if the structure of projectsData is known
-}
 
-export default function ProjectsSection({ projectsData }: ProjectsSectionProps) {
+export default function ProjectsSection() {
   const [filter, setFilter] = useState("All");
   const shown = allProjects.filter(p =>
     filter === "All" || p.category.split(" & ").map(c => c.trim()).includes(filter)

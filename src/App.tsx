@@ -31,6 +31,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   Blogs: BlogsSection,
   Contact: ContactSection,
   Resume: ResumeSection,
+  Profile: ProfileAdminSection,
 };
 
 function useIsMobile() {
@@ -51,13 +52,8 @@ export default function App() {
   const [browserOpen, setBrowserOpen] = useState(false);
   const [profileMd, setProfileMd] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => localStorage.getItem('theme') === 'light' ? 'light' : 'dark');
-  const [voiceModalOpen, setVoiceModalOpen] = useState(false);
-  const [tryVoicePopupShown, setTryVoicePopupShown] = useState(false);
-  const [messages, setMessages] = useState<any[]>([{
-    sender: "bot",
-    text: "Hello! I am Prabhat Kumar's AI Assistant. You can ask about Prabhat's skills, projects, or anything else."
-  }]);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => localStorage.getItem('theme') === 'light' ? 'light' : 'dark');  const [voiceModalOpen, setVoiceModalOpen] = useState(false);
+  const [tryVoicePopupShown, setTryVoicePopupShown] = useState(false);  const [messages, setMessages] = useState<any[]>([{ sender: "bot", text: "Hello! I am Prabhat Kumar's AI Assistant. You can ask about Prabhat's skills, projects, or anything else." }]);
 
   const isMobile = useIsMobile();
 
@@ -129,7 +125,11 @@ export default function App() {
             onBrowserClick={() => setBrowserOpen(true)}
             theme={theme}
             setTheme={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
-          />
+ />
+          <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed} messages={messages} setMessages={setMessages} >
+
+            {/* content that should be inside chat window based on activeSection */}
+          </ChatWindow>
           <VoiceAssistantModal
             open={voiceModalOpen}
             onClose={() => setVoiceModalOpen(false)}
@@ -140,8 +140,10 @@ export default function App() {
             open={browserOpen}
             onClose={() => setBrowserOpen(false)}
           />
-          <SocialGrid open={isGridOpen} />
-          <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed}>
+          <SocialGrid open={isGridOpen}  />
+          <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed} messages={[]} setMessages={function (value: React.SetStateAction<any[]>): void {
+            throw new Error("Function not implemented.");
+          } }>
             {activeSection === 'Home' ? (
               <ChatbotSection messages={messages} setMessages={setMessages} />
             ) : activeSection === 'Profile (Admin)' ? (

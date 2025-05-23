@@ -69,11 +69,7 @@ const education = [
   }
 ];
 
-interface EducationSectionProps {
-  educationData: any; // Replace 'any' with a more specific type if possible
-}
-
-export default function EducationSection({ educationData }: EducationSectionProps) {
+export default function EducationSection() {
   return (
     <section className="max-w-2xl mx-auto mt-10">
       <h2 className="text-center text-4xl md:text-4xl font-extrabold mb-14 mt-0">
@@ -84,7 +80,7 @@ export default function EducationSection({ educationData }: EducationSectionProp
 </h2>
 
       <div className="flex flex-col items-center gap-10">
-        {(educationData || education).map((ed: any, index: number) => ( // Use educationData if available, otherwise use the hardcoded data. Added type annotations for ed and index
+        {education.map((ed: any, index: number) => ( // Use educationData if available, otherwise use the hardcoded data. Added type annotations for ed and index
           <motion.div
           key={ed.school + ed.year}
           initial={{

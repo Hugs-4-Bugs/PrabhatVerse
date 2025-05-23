@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface SkillsSectionProps {
-  skillsData: any; // Replace 'any' with a more specific type if possible
+  // skillsData: any; // Removed as data is defined internally
 }
 
 const skills = {
@@ -95,7 +95,7 @@ const getRandomStartPosition = (index: any): any => {
   }
 };
 
-export default function SkillsSection({ skillsData }: SkillsSectionProps) {
+export default function SkillsSection() {
   const [open, setOpen] = useState<{ [key: string]: boolean }>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);

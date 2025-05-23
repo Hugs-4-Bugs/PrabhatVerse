@@ -14,11 +14,7 @@ async function fileToBase64(file: File): Promise<string> {
   });
 }
 
-interface ResumeSectionProps {
-  resumeData: any;
-}
-
-export default function ResumeSection({ resumeData }: ResumeSectionProps) {
+export default function ResumeSection() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [auth, setAuth] = useState(false);
   const [email, setEmail] = useState("");
