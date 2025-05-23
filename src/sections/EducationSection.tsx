@@ -44,7 +44,6 @@
 
 
 
-
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -80,7 +79,7 @@ export default function EducationSection() {
 </h2>
 
       <div className="flex flex-col items-center gap-10">
-        {education.map((ed: any, index: number) => ( // Use educationData if available, otherwise use the hardcoded data. Added type annotations for ed and index
+        {education.map((ed, index) => (
           <motion.div
           key={ed.school + ed.year}
           initial={{
@@ -97,7 +96,15 @@ export default function EducationSection() {
             ease: "easeInOut",
             duration: 0.2          // Slower animation
           }}
-          className={`bg-[#232325]/80 border border-gray-700 backdrop-blur-md rounded-3xl p-6 shadow-[0_10px_40px_rgba(0,0,0,0.3)] relative overflow-hidden group cursor-pointer transition-all duration-300 w-full max-w-full`}>
+          className={`${
+            ed.level === "bachelor"
+              ? "h-[170px] w-[820px]" // Large for Bachelor
+              : ed.level === "pre-university"
+              ? "h-[150px] w-[700px]" // Medium for Pre-University
+              : "h-[130px] w-[580px]" // Small for Secondary
+          } bg-[#232325]/80 border border-gray-700 backdrop-blur-md rounded-3xl p-6 shadow-[0_10px_40px_rgba(0,0,0,0.3)] relative overflow-hidden group cursor-pointer transition-all duration-300`}
+        >
+        
             <div className="absolute inset-0 z-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 blur-xl bg-gradient-to-br from-[#ffffff0d] via-[#ffffff0a] to-[#ffffff0d]" />
             <div className="relative z-10">
               <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition duration-300">
@@ -116,3 +123,4 @@ export default function EducationSection() {
     </section>
   );
 }
+
