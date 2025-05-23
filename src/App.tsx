@@ -59,6 +59,11 @@ export default function App() {
     text: "Hello! I am Prabhat Kumar's AI Assistant. You can ask about Prabhat's skills, projects, or anything else."
   }]);
 
+  const [bioData, setBioData] = useState<any>(null);
+  const [projectsData, setProjectsData] = useState<any>(null);
+  const [sectionsData, setSectionsData] = useState<any>(null);
+  const [skillsData, setSkillsData] = useState<any>(null);
+  const [socialLinksData, setSocialLinksData] = useState<any>(null);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -67,6 +72,36 @@ export default function App() {
       .then(setProfileMd)
       .catch(err => console.error("Failed to load profile:", err));
   }, []);
+
+  useEffect(() => {
+ fetch("/data/bio.json")
+      .then(res => res.json())
+      .then(setBioData)
+      .catch(err => console.error("Failed to load bio data:", err));
+  }, []);
+
+  useEffect(() => {
+ fetch("/data/projects.json")
+      .then(res => res.json())
+      .then(setProjectsData)
+      .catch(err => console.error("Failed to load projects data:", err));
+  }, []);
+
+  useEffect(() => {
+ fetch("/data/sections.json")
+      .then(res => res.json())
+      .then(setSectionsData)
+      .catch(err => console.error("Failed to load sections data:", err));
+  }, []);
+
+  useEffect(() => {
+ fetch("/data/skills.json")
+      .then(res => res.json())
+      .then(setSkillsData)
+      .catch(err => console.error("Failed to load skills data:", err));
+  }, []);
+
+
 
   useEffect(() => {
     localStorage.setItem('theme', theme || 'dark');
@@ -98,6 +133,13 @@ export default function App() {
       setTimeout(() => setTryVoicePopupShown(true), 400);
     }
   }, [userType]);
+
+  useEffect(() => {
+    fetch("/data/social_links.json")
+      .then(res => res.json())
+      .then(setSocialLinksData)
+      .catch(err => console.error("Failed to load social links data:", err));
+  }, []);
 
   const SectionComponent = sectionMap[activeSection] || (() => <div className="text-white">Not implemented</div>);
 
@@ -146,8 +188,30 @@ export default function App() {
             ) : activeSection === 'Profile (Admin)' ? (
               <ProfileAdminSection onProfileUpdate={setProfileMd} />
             ) : (
+              /*
+               * Pass fetched data as props to the section components.
+               * If a section doesn't have corresponding data, it will receive `null`.
+               * The section components should handle the case where the data is null (e.g., display a loading message).
+               */
               <Suspense fallback={<div className="text-muted-foreground">Loading...</div>}>
-                <SectionComponent />
+                {activeSection === 'About' && <AboutSection bioData={bioData} />}
+                {activeSection === 'Services' && <ServicesSection servicesData={sectionsData?.services} />}
+                {activeSection === 'Education' && <EducationSection educationData={sectionsData?.education} />}
+                {activeSection === 'Skills' && <SkillsSection skillsData={skillsData} />}
+                {activeSection === 'Projects' && <ProjectsSection projectsData={projectsData} />}
+                {activeSection === 'Technology' && <TechnologySection technologyData={sectionsData?.technology} />}
+                {activeSection === 'Blogs' && <BlogsSection blogsData={sectionsData?.blogs} />}
+                {activeSection === 'Contact' && <ContactSection contactData={sectionsData?.contact} />}
+                {activeSection === 'Resume' && <ResumeSection resumeData={sectionsData?.resume} />}
+                {/*
+                 * The following sections are handled separately above:
+                 * - Home (ChatbotSection)
+                 * - Profile (Admin) (ProfileAdminSection)
+                 *
+                 * If a section is not listed here or in the above conditions,
+                 * the fallback will be displayed.
+                 */}
+                {(!sectionMap[activeSection] && activeSection !== 'Home' && activeSection !== 'Profile (Admin)') && <SectionComponent />}
               </Suspense>
             )}
           </ChatWindow>
