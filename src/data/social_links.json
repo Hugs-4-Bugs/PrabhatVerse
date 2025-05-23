@@ -5,7 +5,7 @@
   { "name": "StackOverflow", "icon": "stack-overflow", "url": "https://stackoverflow.com/users/19520484/prabhat-kumar" },
   { "name": "Naukri", "icon": "briefcase", "url": "https://www.naukri.com/mnjuser/profile?id=&altresid" },
   { "name": "HackerRank", "icon": "code", "url": "https://www.hackerrank.com/profile/Prabhat_7250" },
-  { "name": "LeetCode", "icon": "list-checks", "url": "https://leetcode.com/u/Hugs-2-Bugs/" },
+  { "name": "LeetCode", "icon": "list-check", "url": "https://leetcode.com/u/Hugs-2-Bugs/" },
   { "name": "GeeksforGeeks", "icon": "list-checks", "url": "https://www.geeksforgeeks.org/user/stealthy_prabhat/" },
   { "name": "Twitter", "icon": "twitter", "url": "https://x.com/kattyPrabhat" },
   { "name": "YouTube", "icon": "youtube", "url": "https://www.youtube.com/@Hugs-4-Bugs" },
@@ -13,5 +13,5 @@
   { "name": "Facebook", "icon": "facebook", "url": "https://www.facebook.com/profile.php?id=100009107757751" },
   { "name": "Telegram", "icon": "send", "url": "https://t.me/prabhat_7250" },
   { "name": "Dev.to", "icon": "dev-to", "url": "https://dev.to/?signin=true" },
-  { "name": "Portfolio", "icon": "Monitor", "url": "https://hugs-4-bugs.github.io/myResume/" }
+  { "name": "Portfolio", "icon": "monitor", "url": "https://hugs-4-bugs.github.io/myResume/" }
 ]

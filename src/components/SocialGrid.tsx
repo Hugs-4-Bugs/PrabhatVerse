@@ -8,20 +8,23 @@ interface Social {
   url: string;
 }
 
+
 const iconLibrary: Record<string, React.ReactNode> = {
   github: <i className="fa-brands fa-github fa-lg" />,
   linkedin: <i className="fa-brands fa-linkedin fa-lg" />,
   instagram: <i className="fa-brands fa-instagram fa-lg" />,
   "stack-overflow": <i className="fa-brands fa-stack-overflow fa-lg" />,
   briefcase: <i className="fa fa-briefcase fa-lg" />,
-  code: <i className="fa-solid fa-code fa-lg" />,
-  "list-checks": <i className="fa-solid fa-list-check fa-lg" />,
+  code: <i className="fa-brands fa-hackerrank"></i>,
+  "list-check": <i className="fa-solid fa-code" />,
+  "list-checks": <i className="fa-solid fa-square-binary" />,
   twitter: <i className="fa-brands fa-twitter fa-lg" />,
   youtube: <i className="fa-brands fa-youtube fa-lg" />,
   mail: <i className="fa fa-envelope fa-lg" />,
   facebook: <i className="fa-brands fa-facebook fa-lg" />,
   send: <i className="fa fa-paper-plane fa-lg" />,
   "dev-to": <i className="fa-brands fa-dev fa-lg" />,
+  monitor: <i className="fa-solid fa-globe"></i>
 };
 
 const SocialGrid = ({ open }: { open: boolean }) => {

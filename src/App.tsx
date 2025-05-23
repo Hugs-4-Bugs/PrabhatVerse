@@ -56,14 +56,14 @@ export default function App() {
   const [tryVoicePopupShown, setTryVoicePopupShown] = useState(false);
   const [messages, setMessages] = useState<any[]>([{
     sender: "bot",
-    text: "Hello! I am Prabhat Kumar's AI Assistant. You can ask about skills, projects, or anything else."
+    text: "Hello! I am Prabhat Kumar's AI Assistant. You can ask about Prabhat's skills, projects, or anything else."
   }]);
 
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    // fetch("/src/data/master_profile.md")
-    fetch("/data/master_profile.md")
+    fetch("/src/data/master_profile.md")
+    // fetch("/data/master_profile.md")
       .then(res => res.text())
       .then(setProfileMd)
       .catch(err => console.error("Failed to load profile:", err));

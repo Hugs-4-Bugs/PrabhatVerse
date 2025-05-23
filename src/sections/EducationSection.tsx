@@ -56,7 +56,7 @@ const education = [
     level: "bachelor"
   },
   {
-    school: "Ram Dulari Ganga Ucha Vidyalaya",
+    school: "Veer Kunwar Singh University",
     degree: "Pre-University Course",
     year: "2016-2018",
     level: "pre-university"
