@@ -1,4 +1,3 @@
-
 import type React from "react";
 import { useRef, useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
