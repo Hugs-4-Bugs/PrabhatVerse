@@ -1,0 +1,12 @@
+{
+    "Frontend": ["React (Basic)", "HTML", "CSS", "Tailwind", "Angular (Basic)"],
+    "Backend": ["Spring Boot", "Node.js", "REST API", "Java"],
+    "Cloud": ["AWS", "EC2", "S3", "Lambda", "RDS", "VPC", "CloudFront", "CloudWatch", "IAM", "SQS", "SNS", "ELB"],
+    "Design": ["Figma", "Adobe XD", "UI/UX"],
+    "Database": ["MySQL", "MongoDB", "PostgreSQL"],
+    "DevOps": ["Git", "Docker", "Jenkins", "Kubernetes", "Jira", "Slack"],
+    "Other": ["Machine Learning", "AppleScript", "Artificial intelligence"],
+    "Trading": ["Technical Analysis", "Algorithmic Trading", "Market Psychology", "Candlestick Patterns", "Backtesting"],
+    "BookWriting": ["Writing", "Creative Writing", "Research", "Self-Help", "Motivation"]
+  }
+  

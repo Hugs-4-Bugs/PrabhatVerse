@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+interface ServicesSectionProps {
+  servicesData: any; // You might want to define a more specific type based on your data structure
+}
+
 const services = [
   {
     title: "API Development and Integration",
@@ -66,7 +70,7 @@ const cardVariants = {
   },
 };
 
-export default function ServicesSection() {
+export default function ServicesSection({ servicesData }: ServicesSectionProps) {
   // const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -113,7 +117,7 @@ export default function ServicesSection() {
                 hoveredIndex !== null && hoveredIndex !== i ? "" : "" // Removed the blur-sm and scale-95 classes
               }
              h-[280px] w-[350px] 
-            `}
+            `} 
           >
             <motion.div
               className="absolute inset-0 z-0 rounded-3xl bg-gradient-to-br from-[#ffffff0d] via-[#ffffff0a] to-[#ffffff0d] "
@@ -125,7 +129,7 @@ export default function ServicesSection() {
                 {s.title}
               </h3>
               <p className="text-gray-300 group-hover:text-gray-100 transition-colors duration-300 overflow-y-auto max-h-[120px] pr-1">
-                {s.desc}
+                {s.desc} 
               </p>
             </div>
           </motion.div>

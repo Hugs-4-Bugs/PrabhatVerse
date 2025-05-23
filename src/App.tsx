@@ -19,8 +19,6 @@ import BlogsSection from "./sections/BlogsSection";
 import ContactSection from "./sections/ContactSection";
 import ResumeSection from "./sections/ResumeSection";
 import ProfileAdminSection from "./sections/ProfileAdminSection";
-import ChatSection from "./sections/ChatSection";
-import MasterProfileSection from "./sections/MasterProfileSection";
 import TryVoicePopup from "./components/TryVoicePopup";
 
 const sectionMap: Record<string, React.ComponentType> = {
@@ -33,9 +31,6 @@ const sectionMap: Record<string, React.ComponentType> = {
   Blogs: BlogsSection,
   Contact: ContactSection,
   Resume: ResumeSection,
-  Chat: ChatSection,
-  Home: ChatbotSection,
-  "Master Profile": MasterProfileSection,
 };
 
 function useIsMobile() {
@@ -64,49 +59,15 @@ export default function App() {
     text: "Hello! I am Prabhat Kumar's AI Assistant. You can ask about Prabhat's skills, projects, or anything else."
   }]);
 
-  const [bioData, setBioData] = useState<any>(null);
-  const [projectsData, setProjectsData] = useState<any>(null);
-  const [sectionsData, setSectionsData] = useState<any>(null);
-  const [skillsData, setSkillsData] = useState<any>(null);
-  const [socialLinksData, setSocialLinksData] = useState<any>(null);
   const isMobile = useIsMobile();
 
   useEffect(() => {
- fetch("/data/master_profile.md")
+    fetch("/src/data/master_profile.md")
+    // fetch("/data/master_profile.md")
       .then(res => res.text())
       .then(setProfileMd)
       .catch(err => console.error("Failed to load profile:", err));
   }, []);
-
-  useEffect(() => {
- fetch("/data/bio.json")
-      .then(res => res.json())
-      .then(setBioData)
-      .catch(err => console.error("Failed to load bio data:", err));
-  }, []);
-
-  useEffect(() => {
- fetch("/data/projects.json")
-      .then(res => res.json())
-      .then(setProjectsData)
-      .catch(err => console.error("Failed to load projects data:", err));
-  }, []);
-
-  useEffect(() => {
- fetch("/data/sections.json")
-      .then(res => res.json())
-      .then(setSectionsData)
-      .catch(err => console.error("Failed to load sections data:", err));
-  }, []);
-
-  useEffect(() => {
- fetch("/data/skills.json")
-      .then(res => res.json())
-      .then(setSkillsData)
-      .catch(err => console.error("Failed to load skills data:", err));
-  }, []);
-
-
 
   useEffect(() => {
     localStorage.setItem('theme', theme || 'dark');
@@ -139,13 +100,6 @@ export default function App() {
     }
   }, [userType]);
 
-  useEffect(() => {
-    fetch("/data/social_links.json")
-      .then(res => res.json())
-      .then(setSocialLinksData)
-      .catch(err => console.error("Failed to load social links data:", err));
-  }, []);
-
   const SectionComponent = sectionMap[activeSection] || (() => <div className="text-white">Not implemented</div>);
 
   return (
@@ -166,7 +120,7 @@ export default function App() {
         />
         <div
           className={`flex-1 flex flex-col min-h-0 relative overflow-hidden transition-all duration-300 ${sidebarCollapsed ? "ml-0 lg:ml-12" : "ml-0 lg:ml-56"}`}
-        >
+        > {/* Adjust margin for small screens based on sidebar collapsed state */}
           <TopBar
             onProfileClick={() => setIsGridOpen(!isGridOpen)}
             isGridOpen={isGridOpen}
@@ -181,38 +135,22 @@ export default function App() {
             onClose={() => setVoiceModalOpen(false)}
             knowledge={profileMd}
             localAi={gptLocalSmartAnswer}
- messages={messages} // Pass messages and setMessages to VoiceAssistantModal
- setMessages={setMessages}
           />
           <BrowserModal
             open={browserOpen}
             onClose={() => setBrowserOpen(false)}
           />
           <SocialGrid open={isGridOpen} />
- <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed} messages={messages} setMessages={setMessages}>
-            <Suspense fallback={<div className="text-muted-foreground">Loading...</div>}>
-              {activeSection === 'Home' && <ChatbotSection messages={messages} setMessages={setMessages} />}
-              {activeSection === 'Home' && <ChatbotSection messages={messages} setMessages={setMessages} knowledge={profileMd} />}
-                {activeSection === 'Services' && <ServicesSection servicesData={sectionsData?.services} />}
-                {activeSection === 'Education' && <EducationSection educationData={sectionsData?.education} />}
-                {activeSection === 'Skills' && <SkillsSection skillsData={skillsData} />}
-                {activeSection === 'Projects' && <ProjectsSection projectsData={projectsData} />}
-                {activeSection === 'Resume' && <ResumeSection resumeData={sectionsData?.resume} />}
- {activeSection === 'Technology' && <TechnologySection />}
- {activeSection === 'Blogs' && <BlogsSection />}
- {activeSection === 'Contact' && <ContactSection />}
- {/*
-                 * The following sections are handled separately above:
-                 * - Home (ChatbotSection)
-                 * - Profile (Admin) (ProfileAdminSection)
-                 *
-                 * If a section is not listed here or in the above conditions,
-                 * the fallback will be displayed.*
-                 */}
- {activeSection === 'Profile (Admin)' && <ProfileAdminSection onProfileUpdate={setProfileMd} />}
-                {(!sectionMap[activeSection] && activeSection !== 'Home' && activeSection !== 'Profile (Admin)') && <SectionComponent />}
+          <ChatWindow activeSection={activeSection} sidebarCollapsed={sidebarCollapsed}>
+            {activeSection === 'Home' ? (
+              <ChatbotSection messages={messages} setMessages={setMessages} />
+            ) : activeSection === 'Profile (Admin)' ? (
+              <ProfileAdminSection onProfileUpdate={setProfileMd} />
+            ) : (
+              <Suspense fallback={<div className="text-muted-foreground">Loading...</div>}>
+                <SectionComponent />
               </Suspense>
-
+            )}
           </ChatWindow>
           <TerminalModal open={terminalOpen} onClose={() => setTerminalOpen(false)} knowledge={profileMd} />
         </div>
@@ -220,10 +158,3 @@ export default function App() {
     </div>
   );
 }
-
-
-
-
-
-
-

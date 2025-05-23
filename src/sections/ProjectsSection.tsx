@@ -149,7 +149,11 @@ const cardVariants = {
   },
 };
 
-export default function ProjectsSection() {
+interface ProjectsSectionProps {
+  projectsData: any; // Define a more specific type if the structure of projectsData is known
+}
+
+export default function ProjectsSection({ projectsData }: ProjectsSectionProps) {
   const [filter, setFilter] = useState("All");
   const shown = allProjects.filter(p =>
     filter === "All" || p.category.split(" & ").map(c => c.trim()).includes(filter)
@@ -185,13 +189,11 @@ export default function ProjectsSection() {
 
   return (
     // project card section
-    <section className="max-w-6xl mx-auto px-6 py-16">
-      <div ref={stickyRef} className="fixed top-16 left-1/2 transform -translate-x-1/3 z-50 bg-opacity-20 backdrop-blur-md py-2 transition-shadow duration-300">
-      {/* <div ref={stickyRef} className="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md py-4 transition-shadow duration-300"> */}
+    <section className="max-w-6xl mx-auto px-6 py-16 relative"> {/* Added relative for sticky positioning */}
+      <div ref={stickyRef} className="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md py-4 transition-shadow duration-300 -mx-6 px-6"> {/* Changed to sticky, adjusted top, removed fixed position classes, added negative horizontal margin to cover full width */}
         <h2 className="text-center text-4xl md:-4xl font-extrabold mb-4">
           <span className="mr-2 mr-2 text-teal-60">💻</span>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-            My Projects
           </span>
         </h2>
         <div className="flex flex-wrap justify-center gap-4">
@@ -223,8 +225,7 @@ export default function ProjectsSection() {
               exit="exit"
               variants={cardVariants}
               transition={{ delay: index * 0.1 }} // Subtle stagger
-              className="bg-zinc-900 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 h-[500px]"
-              style={{ maxHeight: "350px", marginTop: "90px" }}   // container length
+              className="bg-zinc-900 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 flex flex-col" // Removed fixed height and margin, added flex-col for inner content
             >
               <div className="p-6 flex flex-col h-full">
                 <h3 className="text-xl font-bold text-purple-400 mb-2">{pr.title}</h3>

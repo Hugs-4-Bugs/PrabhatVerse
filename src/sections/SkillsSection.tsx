@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface SkillsSectionProps {
+  skillsData: any; // Replace 'any' with a more specific type if possible
+}
+
 const skills = {
   Frontend: ["React (Basic)", "HTML", "CSS", "Tailwind", "Angular (Basic)"],
   Backend: ["Spring Boot", "Node.js", "REST API", "Java"],
@@ -91,7 +95,7 @@ const getRandomStartPosition = (index: any): any => {
   }
 };
 
-export default function SkillsSection() {
+export default function SkillsSection({ skillsData }: SkillsSectionProps) {
   const [open, setOpen] = useState<{ [key: string]: boolean }>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -153,7 +157,7 @@ export default function SkillsSection() {
               initial={inView ? "show" : "hidden"}
               animate={inView ? "show" : "hidden"}
               custom={inView ? { x: 0, y: 0 } : getRandomStartPosition(index)}
-              className="bg-gradient-to-br from-gray-800 to-zinc-700 rounded-2xl shadow-md transition-shadow duration-300 w-[110%] max-w-[500px] mx-auto"
+              className="bg-gradient-to-br from-gray-800 to-zinc-700 rounded-2xl shadow-md transition-shadow duration-300 max-w-[500px] mx-auto w-full"
             >
               <motion.button
                 onClick={() => handleToggle(category)}

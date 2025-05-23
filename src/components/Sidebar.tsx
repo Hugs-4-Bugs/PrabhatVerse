@@ -41,7 +41,7 @@ const Sidebar = ({ activeSection, setActiveSection, collapsed, setCollapsed, the
           </button>
         </div>
         <nav className="flex-1 flex flex-col items-center gap-4 mt-4">
-          {sections.slice(0, 6).map((section, index) => (
+          {sections.map((section, index) => (
             <button
               key={section}
               onClick={() => setActiveSection(section)}

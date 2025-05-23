@@ -31,7 +31,7 @@ export default function AboutSection() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
-      className="relative z-10 max-w-4xl mx-auto mt-20 px-6 py-10 bg-gradient-to-br from-[#1a1a1a] to-[#1e293b] rounded-2xl shadow-2xl border border-neutral-800/50 backdrop-blur-xl"
+      className="relative z-10 w-full max-w-screen-lg mx-auto mt-20 px-6 py-10 bg-gradient-to-br from-[#1a1a1a] to-[#1e293b] rounded-2xl shadow-2xl border border-neutral-800/50 backdrop-blur-xl"
     >
       <motion.h2
         variants={fadeInUp}
